@@ -14,6 +14,10 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
 
+  if (!body.title || !body.url) {
+    return response.status(400).json({ error: 'title or url missing' })
+  }
+
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -27,7 +31,6 @@ blogsRouter.post('/', async (request, response) => {
   await user.save()
 
   await savedBlog.populate('user', { username: 1, name: 1 })
-
   response.status(201).json(savedBlog)
 })
 
