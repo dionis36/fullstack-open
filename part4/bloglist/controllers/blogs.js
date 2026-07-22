@@ -6,23 +6,19 @@ blogsRouter.get('/', async (req, res) => {
   res.json(blogs)
 })
 
-blogsRouter.post('/', async (req, res) => {
-  const body = req.body
-  const user = req.user
+blogsRouter.post('/', async (request, response) => {
+  const body = request.body
+  const user = request.user
 
   if (!user) {
-    return res.status(401).json({ error: 'token missing or invalid' })
-  }
-
-  if (!body.title || !body.url) {
-    return res.status(400).end()
+    return response.status(401).json({ error: 'token missing or invalid' })
   }
 
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes === undefined ? 0 : body.likes,
+    likes: body.likes || 0,
     user: user._id
   })
 
@@ -30,7 +26,9 @@ blogsRouter.post('/', async (req, res) => {
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
 
-  res.status(201).json(savedBlog)
+  await savedBlog.populate('user', { username: 1, name: 1 })
+
+  response.status(201).json(savedBlog)
 })
 
 blogsRouter.delete('/:id', async (req, res) => {
