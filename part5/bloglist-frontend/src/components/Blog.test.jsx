@@ -1,6 +1,7 @@
 import { describe, test, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { BrowserRouter as Router } from 'react-router-dom'
 import Blog from './Blog'
 
 describe('<Blog />', () => {
@@ -21,7 +22,11 @@ describe('<Blog />', () => {
   }
 
   test('renders title and author, but does not render url or likes by default', () => {
-    const { container } = render(<Blog blog={blog} user={user} />)
+    const { container } = render(
+      <Router>
+        <Blog blog={blog} user={user} />
+      </Router>
+    )
 
     const summaryDiv = container.querySelector('.blog-summary')
     expect(summaryDiv).toHaveTextContent('Component testing with react-testing-library')
@@ -32,7 +37,11 @@ describe('<Blog />', () => {
   })
 
   test('renders url and likes when the view button has been clicked', async () => {
-    const { container } = render(<Blog blog={blog} user={user} />)
+    const { container } = render(
+      <Router>
+        <Blog blog={blog} user={user} />
+      </Router>
+    )
 
     const userInstance = userEvent.setup()
     const button = screen.getByText('view')
@@ -46,7 +55,11 @@ describe('<Blog />', () => {
 
   test('if the like button is clicked twice, the event handler is called twice', async () => {
     const mockHandler = vi.fn()
-    render(<Blog blog={blog} user={user} updateLikes={mockHandler} />)
+    render(
+      <Router>
+        <Blog blog={blog} user={user} updateLikes={mockHandler} />
+      </Router>
+    )
 
     const userInstance = userEvent.setup()
 

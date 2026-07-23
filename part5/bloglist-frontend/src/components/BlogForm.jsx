@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Box, Card, Typography, TextField, Button } from '@mui/material'
 
 const BlogForm = ({ createBlog }) => {
   const [title, setTitle] = useState('')
@@ -12,49 +13,58 @@ const BlogForm = ({ createBlog }) => {
       author,
       url
     })
-
     setTitle('')
     setAuthor('')
     setUrl('')
   }
 
   return (
-    <div>
-      <h2>create new</h2>
-      <form onSubmit={handleCreate}>
-        <div>
-          title:
-          <input
-            type="text"
-            value={title}
-            name="Title"
-            onChange={({ target }) => setTitle(target.value)}
-            placeholder="write title here"
-          />
-        </div>
-        <div>
-          author:
-          <input
-            type="text"
-            value={author}
-            name="Author"
-            onChange={({ target }) => setAuthor(target.value)}
-            placeholder="write author here"
-          />
-        </div>
-        <div>
-          url:
-          <input
-            type="text"
-            value={url}
-            name="Url"
-            onChange={({ target }) => setUrl(target.value)}
-            placeholder="write url here"
-          />
-        </div>
-        <button type="submit">create</button>
-      </form>
-    </div>
+    <Card sx={{ p: 3, mb: 3, maxWidth: 500, boxShadow: 2 }}>
+      <Typography variant="h6" component="h3" gutterBottom fontWeight="bold">
+        Create New Blog
+      </Typography>
+      <Box component="form" onSubmit={handleCreate} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <TextField
+          label="Title"
+          variant="outlined"
+          type="text"
+          value={title}
+          name="Title"
+          placeholder="write title here"
+          onChange={({ target }) => setTitle(target.value)}
+          fullWidth
+          size="small"
+        />
+
+        <TextField
+          label="Author"
+          variant="outlined"
+          type="text"
+          value={author}
+          name="Author"
+          placeholder="write author here"
+          onChange={({ target }) => setAuthor(target.value)}
+          fullWidth
+          size="small"
+        />
+
+        <TextField
+          label="URL"
+          variant="outlined"
+          type="text"
+          value={url}
+          name="Url"
+          placeholder="write url here"
+          onChange={({ target }) => setUrl(target.value)}
+          fullWidth
+          size="small"
+        />
+
+        <Button type="submit" variant="contained" color="primary" sx={{ alignSelf: 'flex-start' }}>
+          create
+        </Button>
+      </Box>
+    </Card>
   )
 }
 

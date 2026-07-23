@@ -1,15 +1,9 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Card, CardContent, Typography, Button, Box, Link as MuiLink } from '@mui/material'
 
 const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   const [visible, setVisible] = useState(false)
-
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
 
   const toggleVisibility = () => {
     setVisible(!visible)
@@ -30,42 +24,54 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
     }
   }
 
-  const isCreator = 
+  const isCreator =
     !blog.user ||
-    blog.user === user.username ||
-    blog.user === user.name ||
+    blog.user === user?.username ||
+    blog.user === user?.name ||
     (typeof blog.user === 'object' && (
-      blog.user.username === user.username ||
-      blog.user.name === user.name ||
-      blog.user.id === user.id
+      blog.user.username === user?.username ||
+      blog.user.name === user?.name ||
+      blog.user.id === user?.id
     )) ||
     typeof blog.user === 'string'
 
   return (
-    <div style={blogStyle} className="blog">
-      <div className="blog-summary">
-        {blog.title} {blog.author}{' '}
-        <button onClick={toggleVisibility}>
-          {visible ? 'hide' : 'view'}
-        </button>
-      </div>
+    <Card variant="outlined" className="blog" sx={{ maxWidth: 600 }}>
+      <CardContent sx={{ pb: '16px !important' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="blog-summary">
+          <Typography variant="h6" component="div">
+            <MuiLink component={Link} to={`/blogs/${blog.id}`} underline="hover" color="primary" fontWeight="bold">
+              {blog.title} {blog.author}
+            </MuiLink>
+          </Typography>
+          <Button variant="outlined" size="small" onClick={toggleVisibility}>
+            {visible ? 'hide' : 'view'}
+          </Button>
+        </Box>
 
-      {visible && (
-        <div className="blog-details">
-          <p>{blog.url}</p>
-          <p>
-            likes {blog.likes}{' '}
-            <button onClick={handleLike}>like</button>
-          </p>
-          <p>{blog.user && (blog.user.name || blog.user.username || blog.user)}</p>
-          {isCreator && (
-            <button onClick={handleDelete} style={{ backgroundColor: '#f44336', color: 'white' }}>
-              remove
-            </button>
-          )}
-        </div>
-      )}
-    </div>
+        {visible && (
+          <Box className="blog-details" sx={{ mt: 2 }}>
+            <Typography variant="body2" sx={{ mb: 1 }}>
+              <MuiLink href={blog.url} target="_blank" rel="noreferrer">{blog.url}</MuiLink>
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
+              likes {blog.likes}
+              <Button variant="contained" size="small" onClick={handleLike}>
+                like
+              </Button>
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+              {blog.user && (blog.user.name || blog.user.username || blog.user)}
+            </Typography>
+            {isCreator && (
+              <Button variant="contained" color="error" size="small" onClick={handleDelete} sx={{ mt: 1 }}>
+                remove
+              </Button>
+            )}
+          </Box>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

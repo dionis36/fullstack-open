@@ -16,8 +16,8 @@ describe('Blog app', () => {
 
   test('Login form is shown', async ({ page }) => {
     await expect(page.getByText('Log in to application')).toBeVisible()
-    await expect(page.getByText('username')).toBeVisible()
-    await expect(page.getByText('password')).toBeVisible()
+    await expect(page.getByLabel('Username')).toBeVisible()
+    await expect(page.getByLabel('Password')).toBeVisible()
   })
 
   describe('Login', () => {
