@@ -9,5 +9,5 @@ My solutions and course progress for the [Full Stack Open](https://fullstackopen
 - [x] Part 3: Programming a Server with NodeJS and Express
 - [x] Part 4: Testing Express Servers, User Administration
 - [x] Part 5: Testing React Apps
-- [ ] Part 6: Advanced State Management
+- [x] Part 6: Advanced State Management
 - [ ] Part 7: React Router, Custom Hooks, Styling App with CSS and Webpack
