@@ -1,0 +1,35 @@
+{
+  "anecdotes": [
+    {
+      "content": "If it hurts, do it more often",
+      "id": "1",
+      "votes": 3
+    },
+    {
+      "content": "Adding manpower to a late software project makes it later!",
+      "id": "2",
+      "votes": 5
+    },
+    {
+      "content": "Premature optimization is the root of all evil.",
+      "id": "3",
+      "votes": 4
+    },
+    {
+      "content": "cabhcibicbsdc hd qodcbqidbcq dociqbpd",
+      "votes": 14,
+      "id": "cCGzHLpXIwc"
+    },
+    {
+      "content": "gyg yvou yvyu ouyvoy",
+      "votes": 4,
+      "id": "4p0WtNj8TCY"
+    },
+    {
+      "content": "gyguy  yvitvtewsec yc7exc7",
+      "votes": 4,
+      "id": "VqjzpMc3qGY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
