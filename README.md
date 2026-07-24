@@ -10,4 +10,4 @@ My solutions and course progress for the [Full Stack Open](https://fullstackopen
 - [x] Part 4: Testing Express Servers, User Administration
 - [x] Part 5: Testing React Apps
 - [x] Part 6: Advanced State Management
-- [ ] Part 7: React Router, Custom Hooks, Styling App with CSS and Webpack
+- [x] Part 7: React Router, Custom Hooks, Styling App with CSS and Webpack
